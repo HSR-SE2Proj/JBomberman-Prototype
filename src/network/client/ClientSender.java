@@ -2,8 +2,6 @@ package network.client;
 
 import java.io.IOException;
 
-import network.Message;
-
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 
@@ -18,8 +16,8 @@ public class ClientSender {
 		channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 	}
 	
-	public void send(Message message) throws IOException {
-		channel.basicPublish("", QUEUE_NAME, null, message.body);
+	public void send(byte[] message) throws IOException {
+		channel.basicPublish("", QUEUE_NAME, null, message);
 	}
 	
 	public void close() throws IOException {

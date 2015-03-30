@@ -2,7 +2,8 @@ package network.client;
 
 import java.io.IOException;
 
-import network.Message;
+
+
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -20,7 +21,7 @@ public class ClientReceiver {
 	
 	public ClientReceiver(Connection connection) throws IOException {
 		channel = connection.createChannel();
-		channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
+		channel.exchangeDeclare(EXCHANGE_NAME, "fanout", true);
 		queueName = channel.queueDeclare().getQueue();
 		channel.queueBind(queueName, EXCHANGE_NAME, "");
 		
@@ -28,9 +29,9 @@ public class ClientReceiver {
 		channel.basicConsume(queueName, true, consumer);
 	}
 	
-	public Message receive() throws ShutdownSignalException, ConsumerCancelledException, InterruptedException {
+	public byte[] receive() throws ShutdownSignalException, ConsumerCancelledException, InterruptedException {
 		QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-		return new Message(delivery.getBody());
+		return delivery.getBody();
 	}
 	
 	public void close() throws IOException {

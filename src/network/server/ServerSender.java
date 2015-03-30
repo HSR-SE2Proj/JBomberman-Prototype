@@ -2,7 +2,7 @@ package network.server;
 
 import java.io.IOException;
 
-import network.Message;
+
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -14,11 +14,11 @@ public class ServerSender {
 	
 	public ServerSender(Connection connection) throws IOException {
 		channel = connection.createChannel();
-		channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
+		channel.exchangeDeclare(EXCHANGE_NAME, "fanout", true);
 	}
 	
-	public void send(Message message) throws IOException {
-		channel.basicPublish(EXCHANGE_NAME, "", null, message.body);
+	public void send(byte[] message) throws IOException {
+		channel.basicPublish(EXCHANGE_NAME, "", null, message);
 	}
 	
 	public void close() throws IOException {

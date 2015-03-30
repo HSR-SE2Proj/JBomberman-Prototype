@@ -2,7 +2,8 @@ package network.server;
 
 import java.io.IOException;
 
-import network.Message;
+
+
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -25,9 +26,9 @@ public class ServerReceiver {
 		channel.basicConsume(QUEUE_NAME, true, consumer);
 	}
 	
-	public Message receive() throws ShutdownSignalException, ConsumerCancelledException, InterruptedException {
+	public byte[] receive() throws ShutdownSignalException, ConsumerCancelledException, InterruptedException {
 		QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-		return new Message(delivery.getBody());
+		return delivery.getBody();
 	}
 	
 	public void close() throws IOException {

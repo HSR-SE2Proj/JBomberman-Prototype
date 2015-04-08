@@ -26,7 +26,7 @@ public class ServerNetwork implements NetworkFacade {
 		} catch (IOException e) {
 			System.err.println("Error: Could not connect");
 			e.printStackTrace();
-			assert true;
+			assert false;
 		}
 	}
 	
@@ -39,7 +39,7 @@ public class ServerNetwork implements NetworkFacade {
 		} catch (IOException e) {
 			System.err.println("Error: Could not close down connection");
 			e.printStackTrace();
-			assert true;
+			assert false;
 		}
 	}
 
@@ -50,7 +50,7 @@ public class ServerNetwork implements NetworkFacade {
 		} catch (IOException e) {
 			System.err.println("Error: Could not send message");
 			e.printStackTrace();
-			assert true;
+			assert false;
 		}
 	}
 
@@ -62,7 +62,7 @@ public class ServerNetwork implements NetworkFacade {
 				| InterruptedException e) {
 			System.err.println("Error: Could not receive message");
 			e.printStackTrace();
-			assert true;
+			assert false;
 			return null;
 		}
 	}

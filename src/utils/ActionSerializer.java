@@ -1,7 +1,5 @@
 package utils;
 
-import game.Event;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -9,16 +7,17 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import action.Action;
 
-public class EventSerializer {
-
-	public static byte[] serializeEvent(Event event) {
+public class ActionSerializer {
+	
+	public static byte[] serializeAction(Action action) {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutput out = null;
 		byte[] yourBytes = null;
 		try {
 		  out = new ObjectOutputStream(bos);   
-		  out.writeObject(event);
+		  out.writeObject(action);
 		  yourBytes = bos.toByteArray();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -39,13 +38,13 @@ public class EventSerializer {
 		return yourBytes;
 	}
 	
-	public static Event deserializeEvent(byte[] byteArray) {
+	public static Action deserializeAction(byte[] byteArray) {
 		ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
 		ObjectInput in = null;
-		Event o = null;
+		Action o = null;
 		try {
 		  in = new ObjectInputStream(bis);
-		  o =(Event) in.readObject(); 
+		  o =(Action) in.readObject(); 
 		} catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,4 +64,5 @@ public class EventSerializer {
 		}
 		return o;
 	}
+
 }

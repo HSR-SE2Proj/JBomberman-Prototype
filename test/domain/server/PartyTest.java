@@ -8,12 +8,9 @@ import org.junit.*;
 
 public class PartyTest {
 	private Party party;
-	private Player player;
-	private List<Player> players;
 	@Before
 	public void init() {
 		party = new Party();
-		player = new Player("Test",0);
 	}
 	
 	@Test
